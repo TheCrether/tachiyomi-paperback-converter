@@ -1,0 +1,96 @@
+syntax = "proto3";
+package tachiyomi;
+
+option go_package = "models/tachiyomi";
+
+message BackupChapter {
+	string url = 1;
+	string name = 2;
+	string scanlator = 3;
+	bool read = 4;
+	bool bookmark = 5;
+	int64 lastPageRead = 6;
+	int64 dateFetch = 7;
+	int64 dateUpload = 8;
+	float chapterNumber = 9;
+	int64 sourceOrder = 10;
+}
+
+message BackupTracking {
+	int32 syncId = 1;
+	int64 libraryId = 2;
+	int32 mediaIdInt = 3;
+	string trackingUrl = 4;
+	string title = 5;
+	float lastChapterRead = 6;
+	int32 totalChapters = 7;
+	float score = 8;
+	int32 status = 9;
+	int64 startedReadingDate = 10;
+	int64 finishedReadingDate = 11;
+	int64 mediaId = 100;
+}
+
+message BrokenBackupHistory {
+	// string url = 0;
+	int64 lastRead = 1;
+	int64 readDuration = 2;
+}
+
+message BackupHistory {
+	string url = 1;
+	int64 lastRead = 2;
+	int64 readDuration = 3;
+}
+
+enum UpdateStrategy {
+	ALWAYS_UPDATE = 0;
+	ONLY_FETCH_ONE = 1;
+}
+
+message BackupManga {
+	int64 source = 1;
+	string url = 2;
+	string title = 3;
+	optional string artist = 4;
+	optional string author = 5;
+	optional string description = 6;
+	repeated string genres = 7;
+	int32 status = 8;
+	optional string thumbnailUrl = 9;
+	int64 dateAdded = 13;
+	int32 viewer = 14;
+	repeated BackupChapter chapters = 16;
+	repeated int64 categories = 17;
+	repeated BackupTracking tracking = 18;
+	bool favorite = 100;
+	int32 chapterFlags = 101;
+	repeated BrokenBackupHistory brokenHistory = 102;
+	optional int32 viewer_flags = 103;
+	repeated BackupHistory history = 104;
+
+	UpdateStrategy updateStrategy = 105;
+}
+
+message BackupCategory {
+	string name = 1;
+	int64 order = 2;
+	int64 flags = 100;
+}
+
+message BrokenBackupSource {
+	// string name = 0;
+	int64 sourceId = 1;
+}
+
+message BackupSource {
+	string name = 1;
+	int64 sourceId = 2;
+}
+
+message Backup {
+	repeated BackupManga backupManga = 1;
+	repeated BackupCategory backupCategories = 2;
+	repeated BrokenBackupSource brokenBackupSources = 100;
+	repeated BackupSource backupSources = 101;
+}
