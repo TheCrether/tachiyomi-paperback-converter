@@ -44,7 +44,7 @@ type LibraryTab struct {
 type LibraryElement struct {
 	LastRead       float64      `json:"lastRead"`
 	Manga          Manga        `json:"manga"`
-	LastUpdated    int64        `json:"lastUpdated"`
+	LastUpdated    float64      `json:"lastUpdated"`
 	DateBookmarked float64      `json:"dateBookmarked"`
 	LibraryTabs    []LibraryTab `json:"libraryTabs"`
 	Updates        int          `json:"updates"`
@@ -63,8 +63,8 @@ type Chapter struct {
 	MangaId      string  `json:"mangaId"`
 	Volume       int     `json:"volume"`
 	Id           string  `json:"id"`
-	Time         int64   `json:"time"`
-	SortingIndex int64   `json:"sortingIndex"`
+	Time         float64 `json:"time"`
+	SortingIndex float64 `json:"sortingIndex"`
 	SourceId     string  `json:"sourceId"`
 	Group        string  `json:"group"`
 	LangCode     string  `json:"langCode"`
