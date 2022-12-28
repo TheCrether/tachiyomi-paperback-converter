@@ -66,7 +66,7 @@ message BackupManga {
 	bool favorite = 100;
 	int32 chapterFlags = 101;
 	repeated BrokenBackupHistory brokenHistory = 102;
-	optional int32 viewer_flags = 103;
+	int32 viewer_flags = 103;
 	repeated BackupHistory history = 104;
 
 	UpdateStrategy updateStrategy = 105;
