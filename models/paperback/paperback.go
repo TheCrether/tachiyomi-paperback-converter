@@ -113,7 +113,7 @@ type ActiveSource struct {
 
 type Backup struct {
 	Library             []LibraryElement   `json:"library"`
-	SourceMangas        []SourceManga      `json:"sourceManags"`
+	SourceMangas        []SourceManga      `json:"sourceMangas"`
 	ChapterMarkers      []ChapterMarker    `json:"chapterMarkers"`
 	BackupSchemaVersion int                `json:"backupSchemaVersion"`
 	Date                float64            `json:"date"`

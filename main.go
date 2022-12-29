@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bytes"
+	"compress/gzip"
 	"encoding/json"
-	"fmt"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/TheCrether/tachiyomi-paperback-converter/convert"
 	"github.com/TheCrether/tachiyomi-paperback-converter/models/paperback"
@@ -13,40 +15,71 @@ import (
 )
 
 func main() {
-	log.Println(convert.PaperbackToTachiyomi)
-	log.Println(convert.TachiyomiToPaperback)
-	os.Exit(0)
-	if len(os.Args) != 3 {
-		log.Fatalf("Usage:  %s <tachiyomi> <paperback>\n", os.Args[0])
-	}
-	fmt.Println("Hello, World!")
-	in, err := os.ReadFile(os.Args[1])
-	if err != nil {
-		log.Fatalln("Error reading file:", err)
+	if len(os.Args) != 4 {
+		log.Fatalf("Usage:  %s <output-type: tachiyomi/paperback> <input> <output>\n", os.Args[0])
 	}
 
-	backup := &tachiyomi.Backup{}
-	if err := proto.Unmarshal(in, backup); err != nil {
-		log.Fatalln("Failed to parse backup:", err)
-	}
+	if strings.ToLower(os.Args[1]) == "tachiyomi" {
+		in, err := os.ReadFile(os.Args[2])
+		if err != nil {
+			log.Fatalln("Error reading file:", err)
+		}
 
-	log.Println(backup.BackupManga[0])
-	jsonOut, err := json.MarshalIndent(backup, "", "  ")
-	if err != nil {
-		log.Fatalln("Failed to marshal backup:", err)
+		var backup *paperback.Backup
+		err = json.Unmarshal(in, &backup)
+		if err != nil {
+			log.Fatalln("Error unmarshalling json:", err)
+		}
+		tachiyomiBackup, err := convert.ConvertPaperbackToTachiyomi(backup)
+		if err != nil {
+			log.Fatalln("Error converting backup:", err)
+		}
+		out, err := proto.Marshal(tachiyomiBackup)
+		if err != nil {
+			log.Fatalln("Error marshalling proto:", err)
+		}
+		var b bytes.Buffer
+		gz := gzip.NewWriter(&b)
+		if _, err := gz.Write(out); err != nil {
+			log.Fatalln("Error compressing backup:", err)
+		}
+		if err := gz.Flush(); err != nil {
+			log.Fatalln("Error compressing backup:", err)
+		}
+		if err := gz.Close(); err != nil {
+			log.Fatalln("Error compressing backup:", err)
+		}
+		out = b.Bytes()
+		if !strings.HasSuffix(os.Args[3], ".gz") {
+			os.Args[3] += ".gz"
+		}
+		err = os.WriteFile(os.Args[3], out, 0644)
+		if err != nil {
+			log.Fatalln("Error writing file:", err)
+		}
+	} else if strings.ToLower(os.Args[1]) == "paperback" {
+		in, err := os.ReadFile(os.Args[2])
+		if err != nil {
+			log.Fatalln("Error reading file:", err)
+		}
+		var backup *tachiyomi.Backup
+		err = proto.Unmarshal(in, backup)
+		if err != nil {
+			log.Fatalln("Error unmarshalling proto:", err)
+		}
+		paperbackBackup, err := convert.ConvertTachiyomiToPaperback(backup)
+		if err != nil {
+			log.Fatalln("Error converting backup:", err)
+		}
+		out, err := json.Marshal(paperbackBackup)
+		if err != nil {
+			log.Fatalln("Error marshalling json:", err)
+		}
+		err = os.WriteFile(os.Args[3], out, 0644)
+		if err != nil {
+			log.Fatalln("Error writing file:", err)
+		}
+	} else {
+		log.Fatalf("Usage:  %s <tachiyomi/paperback> <input> <output>\n", os.Args[0])
 	}
-	os.WriteFile("test-data/tachiyomi.json", jsonOut, 0644)
-
-	log.Println("\nPAPERBACK")
-
-	in, err = os.ReadFile(os.Args[2])
-	if err != nil {
-		log.Fatalln("Error reading file:", err)
-	}
-
-	pbBackup := &paperback.Backup{}
-	if err := json.Unmarshal(in, pbBackup); err != nil {
-		log.Fatalln("Failed to parse backup:", err)
-	}
-	log.Println(pbBackup.Library[0])
 }

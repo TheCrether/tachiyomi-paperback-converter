@@ -8,6 +8,7 @@ import (
 	"github.com/TheCrether/tachiyomi-paperback-converter/models/tachiyomi"
 )
 
+// TODO ConvertTachiyomiToPaperback
 func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, error) {
 	backup := config.DefaultPaperbackBackup()
 	return backup, errors.New("not implemented")
