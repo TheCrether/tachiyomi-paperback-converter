@@ -52,12 +52,12 @@ message BackupManga {
 	int64 source = 1;
 	string url = 2;
 	string title = 3;
-	optional string artist = 4;
-	optional string author = 5;
-	optional string description = 6;
+	string artist = 4;
+	string author = 5;
+	string description = 6;
 	repeated string genres = 7;
 	int32 status = 8;
-	optional string thumbnailUrl = 9;
+	string thumbnailUrl = 9;
 	int64 dateAdded = 13;
 	int32 viewer = 14;
 	repeated BackupChapter chapters = 16;
