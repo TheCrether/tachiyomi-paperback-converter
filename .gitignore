@@ -21,4 +21,5 @@
 go.work
 # end of https://github.com/github/gitignore/blob/main/Go.gitignore
 
-test-data/
+.vscode/*
+!.vscode/launch.json

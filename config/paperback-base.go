@@ -2,22 +2,19 @@ package config
 
 import (
 	"encoding/json"
+	"fmt"
+	"math"
+	"strings"
+	"time"
 
 	"github.com/TheCrether/tachiyomi-paperback-converter/models/paperback"
 )
 
 var defaultBackup = `{
-  "library": [],
-  "sourceMangas": [],
-  "chapterMarkers": [],
-  "backupSchemaVersion": 3,
-  "date": 693525190.64852703,
-  "tabs": [],
-  "version": "v0.7-r45",
-  "sourceRepositories": [
+	"sourceRepositories": [
     {
-      "name": "Extensions NepNep (Netsky Fork)",
-      "url": "https://thenetsky.github.io/extensions-generic/nepnep",
+      "name": "Extensions Madara (Netsky Fork)",
+      "url": "https://thenetsky.github.io/extensions-generic/madara",
       "type": 0
     },
     {
@@ -26,8 +23,23 @@ var defaultBackup = `{
       "type": 0
     },
     {
+      "name": "Extensions NSFW (Netsky Fork)",
+      "url": "https://thenetsky.github.io/extensions-sources/nsfw",
+      "type": 0
+    },
+    {
+      "name": "Extensions NepNep (Netsky Fork)",
+      "url": "https://thenetsky.github.io/extensions-generic/nepnep",
+      "type": 0
+    },
+    {
       "name": "BuddyComplex Extensions (0.6)",
       "url": "https://thenetsky.github.io/extensions-buddycomplex/0.6",
+      "type": 0
+    },
+    {
+      "name": "NmN's Extensions",
+      "url": "https://pandeynmn.github.io/nmns-extensions/main",
       "type": 0
     },
     {
@@ -36,18 +48,18 @@ var defaultBackup = `{
       "type": 0
     },
     {
+      "name": "Netsky's Extensions (0.6)",
+      "url": "https://thenetsky.github.io/netskys-extensions/0.6",
+      "type": 0
+    },
+    {
       "name": "Extensions MangaBox (Netsky Fork)",
       "url": "https://thenetsky.github.io/extensions-generic/mangabox",
       "type": 0
     },
     {
-      "name": "Extensions Madara (Netsky Fork)",
-      "url": "https://thenetsky.github.io/extensions-generic/madara",
-      "type": 0
-    },
-    {
-      "name": "Extensions NSFW (Netsky Fork)",
-      "url": "https://thenetsky.github.io/extensions-sources/nsfw",
+      "name": "MangaStream Extensions (0.6)",
+      "url": "https://thenetsky.github.io/extensions-mangastream/0.6",
       "type": 0
     }
   ],
@@ -67,6 +79,22 @@ var defaultBackup = `{
       "version": "2.2.0",
       "icon": "icon.png",
       "name": "MangaSee"
+    },
+    {
+      "author": "NmN",
+      "desc": "New Reaperscans source.",
+      "website": "http://github.com/pandeynmm",
+      "id": "ReaperScans",
+      "tags": [
+        { "type": "info", "text": "English" },
+        { "type": "danger", "text": "Cloudflare" }
+      ],
+      "contentRating": "EVERYONE",
+      "websiteBaseURL": "https://reaperscans.com",
+      "repo": "https://pandeynmn.github.io/nmns-extensions/main",
+      "version": "3.0.13",
+      "icon": "icon.png",
+      "name": "ReaperScans"
     },
     {
       "author": "Netsky",
@@ -210,12 +238,108 @@ var defaultBackup = `{
       "version": "3.2.4",
       "icon": "icon.png",
       "name": "nhentai"
+    },
+    {
+      "author": "NmN",
+      "desc": "Extension that pulls manga from Flame Scans.",
+      "website": "http://github.com/pandeynmm",
+      "id": "FlameScans",
+      "tags": [
+        { "type": "info", "text": "English" },
+        { "type": "danger", "text": "Cloudflare" }
+      ],
+      "contentRating": "EVERYONE",
+      "websiteBaseURL": "https://flamescans.org",
+      "repo": "https://pandeynmn.github.io/nmns-extensions/main",
+      "version": "2.0.5",
+      "icon": "icon.ico",
+      "name": "FlameScans"
+    },
+    {
+      "author": "Netsky",
+      "desc": "Extension that pulls manga from AsuraScans",
+      "website": "http://github.com/TheNetsky",
+      "id": "AsuraScans",
+      "tags": [
+        { "type": "success", "text": "Notifications" },
+        { "type": "danger", "text": "CloudFlare" },
+        { "type": "danger", "text": "Buggy" }
+      ],
+      "contentRating": "MATURE",
+      "websiteBaseURL": "https://www.asurascans.com",
+      "repo": "https://thenetsky.github.io/extensions-mangastream/0.6",
+      "version": "2.1.13",
+      "icon": "icon.png",
+      "name": "AsuraScans"
+    },
+    {
+      "author": "Netsky",
+      "desc": "Extension that pulls manga from ImperfectComic",
+      "website": "http://github.com/TheNetsky",
+      "id": "ImperfectComic",
+      "tags": [{ "type": "success", "text": "Notifications" }],
+      "contentRating": "MATURE",
+      "websiteBaseURL": "https://imperfectcomic.org",
+      "repo": "https://thenetsky.github.io/extensions-mangastream/0.6",
+      "version": "2.1.7",
+      "icon": "icon.png",
+      "name": "ImperfectComic"
+    },
+    {
+      "author": "Netsky",
+      "desc": "Extension that pulls manga from mcreader.net (Manga-Raw.club)",
+      "website": "https://github.com/TheNetsky",
+      "id": "McReader",
+      "tags": [{ "type": "success", "text": "Notifications" }],
+      "contentRating": "MATURE",
+      "websiteBaseURL": "https://www.mreader.co",
+      "repo": "https://thenetsky.github.io/netskys-extensions/0.6",
+      "version": "1.0.4",
+      "icon": "icon.png",
+      "name": "McReader"
     }
   ]
 }`
 
+// https://stackoverflow.com/a/33330705/13156660
+var SWIFT_REFERENCE_DATE = time.Date(2001, 1, 1, 0, 0, 0, 0, time.UTC)
+
+func ConvertSwiftReferenceDateToMilliDate(timeSinceReferenceDate float64) int64 {
+	return SWIFT_REFERENCE_DATE.Add(time.Duration(int(timeSinceReferenceDate)) * time.Second).UnixMilli()
+}
+
+func ConvertTimeToSwiftReferenceDate(time time.Time) float64 {
+	return time.Sub(SWIFT_REFERENCE_DATE).Seconds()
+}
+
+func ConvertMilliDateToSwiftReferenceDate(milliDate int64) float64 {
+	return ConvertTimeToSwiftReferenceDate(time.UnixMilli(milliDate))
+}
+
+func PreciseChapterNumberPaperback(chapterNumber float64) float64 {
+	str := fmt.Sprintf("%f", chapterNumber)
+	if !strings.Contains(str, ".") {
+		return chapterNumber
+	}
+	dotIndex := strings.Index(str, ".")
+	firstZero := strings.Index(str, "0")
+	if firstZero == -1 {
+		return chapterNumber
+	}
+	firstZero -= dotIndex
+	return math.Round(chapterNumber*math.Pow10(firstZero)) / math.Pow10(firstZero)
+}
+
 func DefaultPaperbackBackup() *paperback.Backup {
-	backup := &paperback.Backup{}
+	backup := &paperback.Backup{
+		Library:             []paperback.LibraryElement{},
+		SourceMangas:        []paperback.SourceManga{},
+		ChapterMarkers:      []paperback.ChapterMarker{},
+		BackupSchemaVersion: 3,
+		Date:                ConvertMilliDateToSwiftReferenceDate(time.Now().UnixMilli()),
+		Tabs:                []paperback.Tab{},
+		Version:             "v0.7-r45",
+	}
 	if err := json.Unmarshal([]byte(defaultBackup), backup); err != nil {
 		panic(err)
 	}
