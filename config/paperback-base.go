@@ -10,7 +10,7 @@ import (
 	"github.com/TheCrether/tachiyomi-paperback-converter/models/paperback"
 )
 
-var defaultBackup = `{
+var defaultPaperbackSources = `{
 	"sourceRepositories": [
     {
       "name": "Extensions Madara (Netsky Fork)",
@@ -340,7 +340,7 @@ func DefaultPaperbackBackup() *paperback.Backup {
 		Tabs:                []paperback.Tab{},
 		Version:             "v0.7-r45",
 	}
-	if err := json.Unmarshal([]byte(defaultBackup), backup); err != nil {
+	if err := json.Unmarshal([]byte(defaultPaperbackSources), backup); err != nil {
 		panic(err)
 	}
 	return backup

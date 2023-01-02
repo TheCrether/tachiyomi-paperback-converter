@@ -19,7 +19,7 @@ func reverseSourceMap[K comparable, V comparable](m map[K]V) map[V]K {
 }
 
 var (
-	PaperbackToTachiyomi = map[string]int{
+	PaperbackToTachiyomi = map[string]int64{
 		"AsuraScans":     6247824327199706550,
 		"BatoTo":         7890050626002177109,
 		"FlameScans":     6350607071566689772,
@@ -48,7 +48,7 @@ func ConvertSourceMangaToTachiyomi(paperbackSource *paperback.SourceManga) (int6
 	return int64(source), nil
 }
 
-func ConvertTachiyomiSourceIdToPaperbackId(sourceId int) (string, error) {
+func ConvertTachiyomiSourceIdToPaperbackId(sourceId int64) (string, error) {
 	source, ok := TachiyomiToPaperback[sourceId]
 	if !ok {
 		return "", errors.New("source not found")

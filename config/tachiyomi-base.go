@@ -6,7 +6,7 @@ import (
 	"github.com/TheCrether/tachiyomi-paperback-converter/models/tachiyomi"
 )
 
-var defaultSources = `[
+var defaultTachiyomiSources = `[
     { "name": "MangaBuddy", "sourceId": 5020395055978987501 },
     { "name": "TeenManhua", "sourceId": 4667040294697888218 },
     { "name": "1st Kiss", "sourceId": 3470433521851976761 },
@@ -26,7 +26,7 @@ var defaultSources = `[
 
 func DefaultTachiyomiBackup() *tachiyomi.Backup {
 	sources := []*tachiyomi.BackupSource{}
-	err := json.Unmarshal([]byte(defaultSources), &sources)
+	err := json.Unmarshal([]byte(defaultTachiyomiSources), &sources)
 	if err != nil {
 		panic(err)
 	}
