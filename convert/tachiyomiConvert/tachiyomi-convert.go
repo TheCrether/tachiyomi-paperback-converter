@@ -14,13 +14,17 @@ import (
 // https://github.com/tachiyomiorg/tachiyomi/blob/db3c98fe729ef6b00beba8d605bc002a7b8d1712/app/src/main/java/eu/kanade/tachiyomi/ui/reader/setting/ReadingModeType.kt#L14
 var TACHIYOMI_VIEWER_FLAG int32 = 0
 
-func manganatoHandler(tManga *tachiyomi.BackupManga, mangaId string) {
+func mangakakalotUrlHandler(tManga *tachiyomi.BackupManga, mangaId string) {
 	if strings.HasPrefix(mangaId, "http") {
 		// this is the normal case since the paperback extension is sensible enough to be consistent
 		tManga.Url = mangaId
 		return
 	}
 	tManga.Url = "/manga/" + mangaId
+}
+
+func manganatoReadHandler(marker *paperback.ChapterMarker, chapterId string) string {
+	return chapterId
 }
 
 var (
@@ -35,7 +39,7 @@ var (
 		"Hiatus":              6,
 	}
 
-	paperbackSourceHandler = map[string]func(*tachiyomi.BackupManga, string){
+	paperbackUrlHandler = map[string]func(*tachiyomi.BackupManga, string){
 		"AsuraScans": func(tManga *tachiyomi.BackupManga, mangaId string) { // asurascans
 			tManga.Url = "/manga/" + mangaId
 		},
@@ -58,8 +62,8 @@ var (
 		"MangaDex": func(tManga *tachiyomi.BackupManga, mangaId string) { // mangadex
 			tManga.Url = "/manga/" + mangaId
 		},
-		"Mangakakalot": manganatoHandler,
-		"Manganato":    manganatoHandler,
+		"Mangakakalot": mangakakalotUrlHandler,
+		"Manganato":    mangakakalotUrlHandler,
 		"Mangasee": func(tManga *tachiyomi.BackupManga, mangaId string) { // mangasee
 			tManga.Url = "/manga/" + strings.ToLower(mangaId)
 		},
@@ -82,10 +86,51 @@ var (
 		},
 	}
 
-	tachiyomiReadHandler = map[string]func(string) string{
-		"AsuraScans": func(chapterId string) string {
+	tachiyomiReadHandler = map[string]func(*paperback.ChapterMarker, string) string{
+		"AsuraScans": func(marker *paperback.ChapterMarker, chapterId string) string {
 			return "/" + chapterId + "/"
 		},
+		"BatoTo": func(marker *paperback.ChapterMarker, chapterId string) string {
+			return "/chapter/" + chapterId
+		},
+		"FlameScans": func(marker *paperback.ChapterMarker, chapterId string) string {
+			chapterId = strings.ReplaceAll(chapterId, "https://flamescans.org/"+marker.Chapter.MangaId, "")
+			return "/" + chapterId + "/"
+		},
+		"ImperfectComic": func(marker *paperback.ChapterMarker, chapterId string) string {
+			return "/" + chapterId + "/"
+		},
+		"KissManga": func(marker *paperback.ChapterMarker, chapterId string) string {
+			return "https://1stkissmanga.io/manga/" + chapterId + "/?style=list"
+		},
+		"MangaBuddy": func(marker *paperback.ChapterMarker, chapterId string) string {
+			return "/" + marker.Chapter.MangaId + "/" + chapterId
+		},
+		"MangaDex": func(marker *paperback.ChapterMarker, chapterId string) string {
+			return "/chapter/" + chapterId
+		},
+		"Mangakakalot": manganatoReadHandler,
+		"Manganato":    manganatoReadHandler,
+		"Mangasee": func(marker *paperback.ChapterMarker, chapterId string) string {
+			return "/read-online/" + chapterId
+		},
+		"McReader": func(marker *paperback.ChapterMarker, chapterId string) string {
+			return "/reader/en/" + chapterId + "/"
+		},
+		"ReaperScans": func(marker *paperback.ChapterMarker, chapterId string) string {
+			return "/comics/" + marker.Chapter.MangaId + "/chapters/" + chapterId
+		},
+		"TeenManhua": func(marker *paperback.ChapterMarker, chapterId string) string {
+			return "https://teenmanhua.com/manga/" + chapterId + "/?style=list"
+		},
+		"Toonily": func(marker *paperback.ChapterMarker, chapterId string) string {
+			return "https://toonily.com/webtoon/" + chapterId + "/?style=list"
+		},
+		// TODO find good way to convert paperback structure to weird tachiyomi string
+		// "Webtoons": func(marker *paperback.ChapterMarker, chapterId string) string {
+		// 	split := strings.Split(chapterId, "/list")
+		// 	return fmt.Sprintf("/en/%s/episode-%d", split[0], int(marker.Chapter.ChapNum))
+		// },
 	}
 )
 
@@ -118,7 +163,7 @@ func convertPaperbackSourceDataToTachiyomi(paperbackBackup *paperback.Backup, pa
 		return err
 	}
 	tachiyomiManga.Source = tachiyomiSourceId
-	if handler, ok := paperbackSourceHandler[pSourceManga.SourceId]; ok {
+	if handler, ok := paperbackUrlHandler[pSourceManga.SourceId]; ok {
 		handler(tachiyomiManga, pSourceManga.MangaId)
 	} else {
 		return errors.New("could not convert source")
@@ -127,13 +172,14 @@ func convertPaperbackSourceDataToTachiyomi(paperbackBackup *paperback.Backup, pa
 		chapterMarkers := getChapterMarkers(paperbackBackup, pSourceManga)
 		for _, chapterMarker := range chapterMarkers {
 			tChapter := &tachiyomi.BackupChapter{
-				Url:           handler(chapterMarker.Chapter.Id),
+				Url:           handler(&chapterMarker, chapterMarker.Chapter.Id),
 				Name:          chapterMarker.Chapter.Name,
 				Read:          chapterMarker.Completed,
 				LastPageRead:  int64(chapterMarker.LastPage),
 				DateFetch:     config.ConvertSwiftReferenceDateToMilliDate(paperbackBackup.Date),
 				DateUpload:    config.ConvertSwiftReferenceDateToMilliDate(chapterMarker.Chapter.Time),
 				ChapterNumber: float32(config.PreciseChapterNumberPaperback(chapterMarker.Chapter.ChapNum)),
+				Scanlator:     chapterMarker.Chapter.Group,
 			}
 			tachiyomiManga.Chapters = append(tachiyomiManga.Chapters, tChapter)
 		}

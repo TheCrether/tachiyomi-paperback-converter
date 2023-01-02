@@ -2402,6 +2402,25 @@
   ],
   "chapterMarkers": [
     {
+      "totalPages": 11,
+      "lastPage": 10,
+      "chapter": {
+        "chapNum": 41,
+        "mangaId": "match-made-in-heaven-by-chance",
+        "volume": 0,
+        "id": "match-made-in-heaven-by-chance/chapter-41",
+        "time": 687391200,
+        "sortingIndex": 41,
+        "sourceId": "KissManga",
+        "group": "",
+        "langCode": "gb",
+        "name": "Chapter 41"
+      },
+      "completed": true,
+      "time": 687425812.05640399,
+      "hidden": true
+    },
+    {
       "totalPages": 32,
       "lastPage": 31,
       "chapter": {
