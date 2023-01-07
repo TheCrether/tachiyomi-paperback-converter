@@ -21,20 +21,20 @@ Groups of Manga are called Collections in Paperback. These are converted to Cate
 
 | Source               | Manga | Chapters Read | Notes              |
 | -------------------- | ----- | ------------- | ------------------ |
-| Asura Scans          | ✔️️️     | ✔️️️             |                    |
-| BatoTo               | ✔️️️     | ✔️️️             |                    |
-| Flame Scans          | ✔️️️     | ✔️️️             |                    |
-| Imperfect Comics     | ✔️️️     | ✔️️️             |                    |
-| KissManga (1st Kiss) | ✔️     | ✔️️️             |                    |
-| MangaBuddy           | ✔️     | ✔️️️             |                    |
-| MangaDex             | ✔️     | ️✔️️️️️️️️            |                    |
-| Mangakakalot         | ✔️     | ✔️️️             | might be unstable¹ |
-| Manganato            | ✔️     | ✔️️️             | might be unstable¹ |
-| Mangasee             | ✔️     | ✔️️️             |                    |
-| MCReader.net         | ✔️️️     | ✔️️️             |                    |
-| Reaper Scans         | ✔️️️     | ✔️️️             |                    |
-| TeenManhua           | ✔️     | ✔️️️             |                    |
-| Toonily              | ✔️     | ✔️️️             |                    |
+| Asura Scans          | ✔️     | ✔️             |                    |
+| BatoTo               | ✔️     | ✔️             |                    |
+| Flame Scans          | ✔️     | ✔️             |                    |
+| Imperfect Comics     | ✔️     | ✔️             |                    |
+| KissManga (1st Kiss) | ✔️     | ✔️             |                    |
+| MangaBuddy           | ✔️     | ✔️             |                    |
+| MangaDex             | ✔️     | ✔️             |                    |
+| Mangakakalot         | ✔️     | ✔️             | might be unstable¹ |
+| Manganato            | ✔️     | ✔️             | might be unstable¹ |
+| Mangasee             | ✔️     | ✔️             |                    |
+| MCReader.net         | ✔️     | ✔️             |                    |
+| Reaper Scans         | ✔️     | ✔️             |                    |
+| TeenManhua           | ✔️     | ✔️             |                    |
+| Toonily              | ✔️     | ✔️             |                    |
 | Webtoons             | ✔️     | ❌             |                    |
 
 ¹ - MangaDex and Mangakakalot are known to be unstable, since the Paperback implementation is inconsistent. If there is an issue when converting with these two sources, please open an issue. (especially for the chapters read conversion)

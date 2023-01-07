@@ -72,7 +72,7 @@ func convertPaperbackTagsToTachiyomiGenres(tags []paperback.Tag) []string {
 	for _, tag := range tags {
 		if strings.ToLower(tag.Label) == "genres" {
 			for _, genre := range tag.Tags {
-				genres = append(genres, genre.Value)
+				genres = append(genres, strings.ToUpper(genre.Value[:1])+strings.ToLower(genre.Value[1:]))
 			}
 		}
 	}
