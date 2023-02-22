@@ -33,23 +33,11 @@ func createUniqueUUID(existingUUIDs []string) ([]string, string) {
 	}
 }
 
-func convertTachiyomiGenres(genres []string) []paperback.Tag {
-	// TODO make handler for each source
-	genreList := make([]paperback.TagTag, len(genres))
-	for i, genre := range genres {
-		genreList[i] = paperback.TagTag{
-			Id:    strings.ToLower(genre),
-			Value: genre,
-		}
+func convertTachiyomiGenres(tManga *tachiyomi.BackupManga) []paperback.Tag {
+	if handler, ok := genreConverter[tManga.Source]; ok {
+		return handler(tManga)
 	}
-	paperbackGenres := []paperback.Tag{
-		{
-			Id:    "0",
-			Label: "genres",
-			Tags:  genreList,
-		},
-	}
-	return paperbackGenres
+	return genreConverter[-1](tManga)
 }
 
 func getLastRead(manga *tachiyomi.BackupManga) int64 {
@@ -77,6 +65,14 @@ func getTabs(tBackup *tachiyomi.Backup) []paperback.Tab {
 	return tabs
 }
 
+func getTabsForManga(pBackup *paperback.Backup, manga *tachiyomi.BackupManga) []paperback.LibraryTab {
+	tabs := make([]paperback.LibraryTab, len(manga.Categories))
+	for i, category := range manga.Categories {
+		tabs[i] = paperback.LibraryTab(pBackup.Tabs[category])
+	}
+	return tabs
+}
+
 // TODO ConvertTachiyomiToPaperback
 func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, error) {
 	backup := config.DefaultPaperbackBackup()
@@ -100,7 +96,7 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 			Author: manga.Author,
 			Artist: manga.Artist,
 			Titles: []string{manga.Title},
-			Tags:   convertTachiyomiGenres(manga.Genres),
+			Tags:   convertTachiyomiGenres(manga),
 			Desc:   manga.Description,
 			Image:  manga.ThumbnailUrl,
 			Hentai: false, // tachiyomi doesn't seem to have a flag for this
@@ -119,7 +115,7 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 			LastRead:       config.ConvertMilliDateToSwiftReferenceDate(getLastRead(manga)),
 			LastUpdated:    0, // TODO maybe get from highest dateFetch from chapter?
 			DateBookmarked: config.ConvertMilliDateToSwiftReferenceDate(manga.DateAdded),
-			LibraryTabs:    []paperback.LibraryTab{}, // TODO look at tachiyomi way of saving categories
+			LibraryTabs:    getTabsForManga(backup, manga),
 			Updates:        0,
 		}
 		sourceMangaUUIDs, sourceMangaUUID = createUniqueUUID(sourceMangaUUIDs)
