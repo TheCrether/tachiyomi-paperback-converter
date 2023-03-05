@@ -34,10 +34,26 @@ func createUniqueUUID(existingUUIDs []string) ([]string, string) {
 }
 
 func convertTachiyomiGenres(tManga *tachiyomi.BackupManga) []paperback.Tag {
-	if handler, ok := genreConverter[tManga.Source]; ok {
-		return handler(tManga)
+	var handler func(string) string
+	var ok bool
+	if handler, ok = genreIdConverter[tManga.Source]; !ok {
+		handler = genreIdConverter[-1]
 	}
-	return genreConverter[-1](tManga)
+	genres := tManga.Genres
+	genreList := make([]paperback.TagTag, len(genres))
+	for i, genre := range genres {
+		genreList[i] = paperback.TagTag{
+			Id:    handler(genre),
+			Value: genre,
+		}
+	}
+	return []paperback.Tag{
+		{
+			Id:    "0",
+			Label: "genres",
+			Tags:  genreList,
+		},
+	}
 }
 
 func getLastRead(manga *tachiyomi.BackupManga) int64 {
@@ -119,13 +135,17 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 			Updates:        0,
 		}
 		sourceMangaUUIDs, sourceMangaUUID = createUniqueUUID(sourceMangaUUIDs)
+		mangaIdHandler, okBool := tachiyomiUrlHandler[manga.Source]
+		if !okBool {
+			mangaIdHandler = tachiyomiUrlHandler[-1]
+		}
 		sourceManga := &paperback.SourceManga{
 			Manga:        *pManga,
 			OriginalInfo: *pManga,
 			SourceId:     source,
 			Id:           sourceMangaUUID,
-			MangaId:      "TODO", // TODO add handlers to convert URL
 		}
+		mangaIdHandler(sourceManga, manga.Url)
 
 		backup.Library = append(backup.Library, *libraryElement)
 		backup.SourceMangas = append(backup.SourceMangas, *sourceManga)
