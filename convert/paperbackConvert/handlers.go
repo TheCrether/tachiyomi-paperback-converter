@@ -84,9 +84,6 @@ var (
 		6350607071566689772: func(pManga *paperback.SourceManga, mangaId string) {
 			pManga.MangaId = mangaId
 		},
-		5904527501696587341: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
 		3470433521851976761: func(pManga *paperback.SourceManga, mangaId string) {
 			pManga.MangaId = mangaId
 		},

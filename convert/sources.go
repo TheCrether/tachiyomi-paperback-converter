@@ -20,21 +20,20 @@ func reverseSourceMap[K comparable, V comparable](m map[K]V) map[V]K {
 
 var (
 	PaperbackToTachiyomi = map[string]int64{
-		"AsuraScans":     6247824327199706550,
-		"BatoTo":         7890050626002177109,
-		"FlameScans":     6350607071566689772,
-		"ImperfectComic": 5904527501696587341,
-		"KissManga":      3470433521851976761,
-		"MangaBuddy":     5020395055978987501,
-		"MangaDex":       2499283573021220255,
-		"Mangakakalot":   2528986671771677900,
-		"Manganato":      1024627298672457456,
-		"Mangasee":       9,
-		"McReader":       734865402529567092,
-		"ReaperScans":    5177220001642863679,
-		"TeenManhua":     4667040294697888218,
-		"Toonily":        5190569675461947007,
-		"Webtoons":       2522335540328470744,
+		"AsuraScans":   6247824327199706550,
+		"BatoTo":       7890050626002177109,
+		"FlameScans":   6350607071566689772,
+		"KissManga":    3470433521851976761,
+		"MangaBuddy":   5020395055978987501,
+		"MangaDex":     2499283573021220255,
+		"Mangakakalot": 2528986671771677900,
+		"Manganato":    1024627298672457456,
+		"Mangasee":     9,
+		"McReader":     734865402529567092,
+		"ReaperScans":  5177220001642863679,
+		"TeenManhua":   4667040294697888218,
+		"Toonily":      5190569675461947007,
+		"Webtoons":     2522335540328470744,
 	}
 
 	TachiyomiToPaperback = reverseSourceMap(PaperbackToTachiyomi)

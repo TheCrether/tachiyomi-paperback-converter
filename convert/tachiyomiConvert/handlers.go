@@ -43,9 +43,6 @@ var (
 			split := strings.SplitN(mangaId, "-", 2)
 			tManga.Url = "/series/" + split[1] + "/"
 		},
-		"ImperfectComic": func(tManga *tachiyomi.BackupManga, mangaId string) {
-			tManga.Url = "/manga/" + mangaId + "/"
-		},
 		"KissManga": func(tManga *tachiyomi.BackupManga, mangaId string) {
 			tManga.Url = "/manga/" + mangaId + "/"
 		},
@@ -88,9 +85,6 @@ var (
 		},
 		"FlameScans": func(marker *paperback.ChapterMarker, chapterId string) string {
 			chapterId = strings.ReplaceAll(chapterId, "https://flamescans.org/"+marker.Chapter.MangaId, "")
-			return "/" + chapterId + "/"
-		},
-		"ImperfectComic": func(marker *paperback.ChapterMarker, chapterId string) string {
 			return "/" + chapterId + "/"
 		},
 		"KissManga": func(marker *paperback.ChapterMarker, chapterId string) string {

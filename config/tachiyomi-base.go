@@ -15,7 +15,6 @@ var defaultTachiyomiSources = `[
     { "name": "Bato.to", "sourceId": 7890050626002177109 },
     { "name": "Flame Scans", "sourceId": 6350607071566689772 },
     { "name": "Asura Scans", "sourceId": 6247824327199706550 },
-    { "name": "Imperfect Comics", "sourceId": 5904527501696587341 },
     { "name": "Reaper Scans", "sourceId": 5177220001642863679 },
     { "name": "mcreader.net", "sourceId": 734865402529567092 },
     { "name": "Mangakakalot", "sourceId": 2528986671771677900 },
