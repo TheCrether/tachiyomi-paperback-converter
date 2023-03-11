@@ -32,6 +32,54 @@ var (
 		6: "Hiatus",
 	}
 
+	// TODO modify handlers to fit extensions
+	tachiyomiUrlHandler = map[int64]func(*paperback.SourceManga, string){
+		6247824327199706550: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = strings.Replace(mangaId, "/manga/", "", -1)
+		},
+		7890050626002177109: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = strings.Replace(mangaId, "/series/", "", -1)
+		},
+		6350607071566689772: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = strings.Replace(mangaId[:len(mangaId)-1], "/series/", "", -1)
+		},
+		3470433521851976761: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = strings.Replace(mangaId[:len(mangaId)-1], "/manga/", "", -1)
+		},
+		5020395055978987501: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = mangaId[1:]
+		},
+		2499283573021220255: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = strings.Replace(mangaId, "/manga/", "", -1)
+		},
+		2528986671771677900: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = mangaId
+		},
+		1024627298672457456: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = mangaId
+		},
+		9: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = strings.Replace(mangaId, "/manga/", "", -1)
+		},
+		734865402529567092: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = strings.Replace(mangaId, "/manga/", "", -1)
+		},
+		5177220001642863679: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = strings.Replace(mangaId, "/comics/", "", -1)
+		},
+		4667040294697888218: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = strings.Replace(mangaId, "/manga/", "", -1)
+		},
+		5190569675461947007: func(pManga *paperback.SourceManga, mangaId string) {
+			pManga.MangaId = strings.Replace(mangaId[:len(mangaId)-1], "/webtoon/", "", -1)
+		},
+		2522335540328470744: func(pManga *paperback.SourceManga, mangaId string) {
+			genre := pManga.Manga.Tags[0].Tags[0].Value
+			titleNo := strings.Replace(mangaId, "/episodeList", "", -1)
+			pManga.MangaId = genre + "/" + mangaId + "/list" + titleNo
+		},
+	}
+
 	// -1 converts the string to lowercase and the sources with a different approach have their own handler
 	genreIdConverter = map[int64]func(string) string{
 		-1: func(genre string) string {
@@ -67,55 +115,6 @@ var (
 		},
 		2522335540328470744: func(genre string) string {
 			return strings.ToUpper(genre[:1]) + strings.ToLower(genre[1:])
-		},
-	}
-
-	// TODO modify handlers to fit extensions
-	tachiyomiUrlHandler = map[int64]func(*paperback.SourceManga, string){
-		-1: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		6247824327199706550: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		7890050626002177109: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		6350607071566689772: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		3470433521851976761: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		5020395055978987501: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		2499283573021220255: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		2528986671771677900: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		1024627298672457456: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		9: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		734865402529567092: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		5177220001642863679: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		4667040294697888218: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		5190569675461947007: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
-		},
-		2522335540328470744: func(pManga *paperback.SourceManga, mangaId string) {
-			pManga.MangaId = mangaId
 		},
 	}
 )

@@ -1,7 +1,6 @@
 package paperbackConvert
 
 import (
-	"errors"
 	"strings"
 
 	"github.com/TheCrether/tachiyomi-paperback-converter/config"
@@ -105,6 +104,13 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 		if ok != nil {
 			continue
 		}
+
+		mangaIdHandler, okBool := tachiyomiUrlHandler[manga.Source]
+		if !okBool {
+			// skip manga if source is not supported
+			continue
+		}
+
 		mangaUUIDs, mangaUUID = createUniqueUUID(mangaUUIDs)
 		pManga := &paperback.Manga{
 			Id:     mangaUUID,
@@ -135,10 +141,6 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 			Updates:        0,
 		}
 		sourceMangaUUIDs, sourceMangaUUID = createUniqueUUID(sourceMangaUUIDs)
-		mangaIdHandler, okBool := tachiyomiUrlHandler[manga.Source]
-		if !okBool {
-			mangaIdHandler = tachiyomiUrlHandler[-1]
-		}
 		sourceManga := &paperback.SourceManga{
 			Manga:        *pManga,
 			OriginalInfo: *pManga,
@@ -150,5 +152,5 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 		backup.Library = append(backup.Library, *libraryElement)
 		backup.SourceMangas = append(backup.SourceMangas, *sourceManga)
 	}
-	return backup, errors.New("not implemented")
+	return backup, nil
 }

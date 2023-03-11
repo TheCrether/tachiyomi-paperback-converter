@@ -32,6 +32,8 @@ var (
 		"Hiatus":              6,
 	}
 
+	// the handler functions are used to convert the mangaId to the url of the manga depending on the source.
+	// if a source is not found in the map, the source is not supported for conversion
 	paperbackUrlHandler = map[string]func(*tachiyomi.BackupManga, string){
 		"AsuraScans": func(tManga *tachiyomi.BackupManga, mangaId string) {
 			tManga.Url = "/manga/" + mangaId
