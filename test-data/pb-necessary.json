@@ -117,45 +117,6 @@
     {
       "lastRead": -63114076800,
       "manga": {
-        "id": "AC7B686F-C09D-4AE4-8398-9068B203630C",
-        "rating": 0,
-        "covers": [],
-        "author": "AIHARA Akito",
-        "tags": [
-          {
-            "id": "0",
-            "label": "Genres",
-            "tags": [
-              { "id": "romance", "value": "Romance" },
-              { "id": "school life", "value": "School Life" },
-              { "id": "seinen", "value": "Seinen" }
-            ]
-          },
-          { "id": "1", "label": "Format", "tags": [] }
-        ],
-        "desc": "In the near future a pandemic spreads around the world, so people hiding their mouth with a mask has become the norm. Natsuki, a girl who is secretly reminiscent of the world before the pandemic, and Hata, her classmate, suddenly become friends and share a small secret. This is the story of two \"extraordinary\" people living in the world of the \"new ordinary\"!",
-        "titles": ["New Normal", ""],
-        "image": "https://temp.compsci88.com/cover/New-Normal.jpg",
-        "additionalInfo": {
-          "langFlag": "_unknown",
-          "users": "0",
-          "follows": "1193",
-          "avgRating": "0.0",
-          "views": "0",
-          "langName": "Unknown"
-        },
-        "hentai": false,
-        "artist": "",
-        "status": "Ongoing"
-      },
-      "lastUpdated": 692939286,
-      "dateBookmarked": 692654530.527264,
-      "libraryTabs": [],
-      "updates": 0
-    },
-    {
-      "lastRead": -63114076800,
-      "manga": {
         "id": "4B72EAC9-C9E6-46E2-815C-99F6CF3697D9",
         "rating": 0,
         "covers": [],
@@ -528,53 +489,6 @@
       },
       "lastUpdated": 693961200,
       "dateBookmarked": 694032441.41105199,
-      "libraryTabs": [
-        {
-          "id": "F0E657FE-035E-407F-A29E-712113189020",
-          "name": "converter test",
-          "sortOrder": 0
-        }
-      ],
-      "updates": 0
-    },
-    {
-      "lastRead": -63114076800,
-      "manga": {
-        "status": "Ongoing",
-        "author": "Toy Car, YOON Jae-ho",
-        "titles": ["Solo Login", "Solo Login", "나 홀로 로그인"],
-        "id": "0C508497-5A3D-4FDD-8654-DD64886F0539",
-        "artist": "Rose Studio",
-        "hentai": false,
-        "image": "https://i0.wp.com/imperfectcomic.org/wp-content/uploads/2022/02/1645277875-7092-i373346.jpg",
-        "covers": [],
-        "additionalInfo": {
-          "langFlag": "_unknown",
-          "users": "0",
-          "follows": "0",
-          "avgRating": "0.0",
-          "views": "0",
-          "langName": "Unknown"
-        },
-        "desc": "26-year-old Jung Si-woo never had any friends, because there was nothing interesting about him. He lived an average life as an average person in an average world. But suddenly, the earth faced a great change when Mysterious floating ‘Sky Castles’ appeared. The ‘Sky Castles’ granted some people wings and powers, but unfortunately, Si-woo wasn’t one of them.Original Webtoon:Daum, KakaoPageOfficial Translations:English (COPIN), English (Pocket Comics),",
-        "tags": [
-          {
-            "id": "0",
-            "label": "genres",
-            "tags": [
-              { "id": "action", "value": "Action" },
-              { "id": "adventure", "value": "Adventure" },
-              { "id": "comedy", "value": "Comedy" },
-              { "id": "fantasy", "value": "Fantasy" },
-              { "id": "romance", "value": "Romance" },
-              { "id": "shounen", "value": "Shounen" },
-              { "id": "supernatural", "value": "Supernatural" }
-            ]
-          }
-        ]
-      },
-      "lastUpdated": 692924400,
-      "dateBookmarked": 694032474.16329098,
       "libraryTabs": [
         {
           "id": "F0E657FE-035E-407F-A29E-712113189020",
@@ -1832,79 +1746,6 @@
               { "id": "martial-arts", "value": "Martial Arts" },
               { "id": "school-life", "value": "School Life" },
               { "id": "shounen", "value": "Shounen" }
-            ]
-          }
-        ]
-      },
-      "sourceId": "ImperfectComic"
-    },
-    {
-      "mangaId": "i-log-in-alone",
-      "id": "D9687200-474C-4C44-84F4-EE4FE40C1F55",
-      "manga": {
-        "status": "Ongoing",
-        "author": "Toy Car, YOON Jae-ho",
-        "titles": ["Solo Login", "Solo Login", "나 홀로 로그인"],
-        "id": "0C508497-5A3D-4FDD-8654-DD64886F0539",
-        "artist": "Rose Studio",
-        "hentai": false,
-        "image": "https://i0.wp.com/imperfectcomic.org/wp-content/uploads/2022/02/1645277875-7092-i373346.jpg",
-        "covers": [],
-        "additionalInfo": {
-          "langFlag": "_unknown",
-          "users": "0",
-          "follows": "0",
-          "langName": "Unknown",
-          "views": "0",
-          "avgRating": "0.0"
-        },
-        "desc": "26-year-old Jung Si-woo never had any friends, because there was nothing interesting about him. He lived an average life as an average person in an average world. But suddenly, the earth faced a great change when Mysterious floating ‘Sky Castles’ appeared. The ‘Sky Castles’ granted some people wings and powers, but unfortunately, Si-woo wasn’t one of them.Original Webtoon:Daum, KakaoPageOfficial Translations:English (COPIN), English (Pocket Comics),",
-        "tags": [
-          {
-            "id": "0",
-            "label": "genres",
-            "tags": [
-              { "id": "action", "value": "Action" },
-              { "id": "adventure", "value": "Adventure" },
-              { "id": "comedy", "value": "Comedy" },
-              { "id": "fantasy", "value": "Fantasy" },
-              { "id": "romance", "value": "Romance" },
-              { "id": "shounen", "value": "Shounen" },
-              { "id": "supernatural", "value": "Supernatural" }
-            ]
-          }
-        ]
-      },
-      "originalInfo": {
-        "status": "Ongoing",
-        "author": "Toy Car, YOON Jae-ho",
-        "titles": ["Solo Login", "Solo Login", "나 홀로 로그인"],
-        "id": "0C508497-5A3D-4FDD-8654-DD64886F0539",
-        "artist": "Rose Studio",
-        "hentai": false,
-        "image": "https://i0.wp.com/imperfectcomic.org/wp-content/uploads/2022/02/1645277875-7092-i373346.jpg",
-        "covers": [],
-        "additionalInfo": {
-          "langFlag": "_unknown",
-          "users": "0",
-          "langName": "Unknown",
-          "follows": "0",
-          "views": "0",
-          "avgRating": "0.0"
-        },
-        "desc": "26-year-old Jung Si-woo never had any friends, because there was nothing interesting about him. He lived an average life as an average person in an average world. But suddenly, the earth faced a great change when Mysterious floating ‘Sky Castles’ appeared. The ‘Sky Castles’ granted some people wings and powers, but unfortunately, Si-woo wasn’t one of them.Original Webtoon:Daum, KakaoPageOfficial Translations:English (COPIN), English (Pocket Comics),",
-        "tags": [
-          {
-            "id": "0",
-            "label": "genres",
-            "tags": [
-              { "id": "action", "value": "Action" },
-              { "id": "adventure", "value": "Adventure" },
-              { "id": "comedy", "value": "Comedy" },
-              { "id": "fantasy", "value": "Fantasy" },
-              { "id": "romance", "value": "Romance" },
-              { "id": "shounen", "value": "Shounen" },
-              { "id": "supernatural", "value": "Supernatural" }
             ]
           }
         ]
