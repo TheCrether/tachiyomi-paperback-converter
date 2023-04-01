@@ -6,9 +6,9 @@ type TagTag struct {
 }
 
 type Tag struct {
-	Id    string `json:"id"`
-	Label string `json:"label"`
-	Tags  []TagTag
+	Id    string   `json:"id"`
+	Label string   `json:"label"`
+	Tags  []TagTag `json:"tags"`
 }
 
 type AdditionalInfo struct {
@@ -24,6 +24,7 @@ type Manga struct {
 	Id     string  `json:"id"`
 	Rating float64 `json:"rating"`
 	// Covers []Cover `json:"covers"` // TODO: Check structure for this
+	Covers         []string       `json:"covers"` // temporary solution
 	Author         string         `json:"author"`
 	Tags           []Tag          `json:"tags"`
 	Desc           string         `json:"desc"`

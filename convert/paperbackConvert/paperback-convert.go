@@ -46,10 +46,11 @@ func convertTachiyomiGenres(tManga *tachiyomi.BackupManga) []paperback.Tag {
 			Value: genre,
 		}
 	}
+	// TODO add handler for adding other tag things like "Format" for  Mangasee
 	return []paperback.Tag{
 		{
 			Id:    "0",
-			Label: "genres",
+			Label: "genres", // TODO maybe add handler for sources which write "Genres" instead of "genres"
 			Tags:  genreList,
 		},
 	}
@@ -88,7 +89,18 @@ func getTabsForManga(pBackup *paperback.Backup, manga *tachiyomi.BackupManga) []
 	return tabs
 }
 
+func getLastDateFetch(tManga *tachiyomi.BackupManga) int64 {
+	highestDateFetch := int64(0)
+	for _, chapter := range tManga.Chapters {
+		if chapter.DateFetch > highestDateFetch {
+			highestDateFetch = chapter.DateFetch
+		}
+	}
+	return highestDateFetch
+}
+
 // TODO ConvertTachiyomiToPaperback
+// - chapterMarkers
 func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, error) {
 	backup := config.DefaultPaperbackBackup()
 
@@ -115,6 +127,7 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 		pManga := &paperback.Manga{
 			Id:     mangaUUID,
 			Rating: float64(0),
+			Covers: []string{},
 			Author: manga.Author,
 			Artist: manga.Artist,
 			Titles: []string{manga.Title},
@@ -135,7 +148,7 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 		libraryElement := &paperback.LibraryElement{
 			Manga:          *pManga,
 			LastRead:       config.ConvertMilliDateToSwiftReferenceDate(getLastRead(manga)),
-			LastUpdated:    0, // TODO maybe get from highest dateFetch from chapter?
+			LastUpdated:    config.ConvertMilliDateToSwiftReferenceDate(getLastDateFetch(manga)), // TODO maybe get from highest dateFetch from chapter?
 			DateBookmarked: config.ConvertMilliDateToSwiftReferenceDate(manga.DateAdded),
 			LibraryTabs:    getTabsForManga(backup, manga),
 			Updates:        0,
