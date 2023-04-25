@@ -119,17 +119,13 @@ var (
 	}
 
 	// TODO add more genre conversions
-	genreConverter = map[int64]func(*paperback.Tag){
-		-1: func(tag *paperback.Tag) {
-			tag.Id = "0"
-			tag.Label = "genres"
-		},
+	// every handler only changes the necessary fields, since Id and Label are prepolulated
+	genreTagConverter = map[int64]func(*paperback.Tag){
 		2499283573021220255: func(tag *paperback.Tag) {
 			tag.Id = "tags"
 			tag.Label = "Tags"
 		},
 		9: func(tag *paperback.Tag) {
-			tag.Id = "0"
 			tag.Label = "Genres"
 		},
 	}

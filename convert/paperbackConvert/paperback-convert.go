@@ -33,28 +33,39 @@ func createUniqueUUID(existingUUIDs []string) ([]string, string) {
 }
 
 func convertTachiyomiGenres(tManga *tachiyomi.BackupManga) []paperback.Tag {
-	var handler func(string) string
+	var genreIdHandler func(string) string
 	var ok bool
-	if handler, ok = genreIdConverter[tManga.Source]; !ok {
-		handler = genreIdConverter[-1]
+	if genreIdHandler, ok = genreIdConverter[tManga.Source]; !ok {
+		genreIdHandler = genreIdConverter[-1]
 	}
 	genres := tManga.Genres
+	if len(genres) == 0 {
+		return []paperback.Tag{}
+	}
 	genreList := make([]paperback.TagTag, len(genres))
 	for i, genre := range genres {
 		genreList[i] = paperback.TagTag{
-			Id:    handler(genre),
+			Id:    genreIdHandler(genre),
 			Value: genre,
 		}
 	}
-	// TODO add handler for adding other tag things like "Format" for  Mangasee
-	// TODO get extra tags for sources
-	return []paperback.Tag{
-		{
-			Id:    "0",
-			Label: "genres", // TODO maybe add handler for sources which write "Genres" instead of "genres"
-			Tags:  genreList,
-		},
+	genreTag := paperback.Tag{
+		Id:    "0",
+		Label: "genres",
+		Tags:  genreList,
 	}
+	var genreTagHandler func(*paperback.Tag)
+	if genreTagHandler, ok = genreTagConverter[tManga.Source]; ok {
+		genreTagHandler(&genreTag)
+	}
+	tags := []paperback.Tag{
+		genreTag,
+	}
+	var extras []paperback.Tag
+	if extras, ok = tagExtras[tManga.Source]; ok {
+		tags = append(tags, extras...)
+	}
+	return tags
 }
 
 func getLastRead(manga *tachiyomi.BackupManga) int64 {
