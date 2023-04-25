@@ -11,9 +11,9 @@ func mangakakalotGenreHandler(genre string) string {
 	convertMap := map[string]string{
 		"Comedy":        "6",
 		"Romance":       "27",
-		"School Life":   "28",
+		"School life":   "28",
 		"Seinen":        "30",
-		"Slice of Life": "35",
+		"Slice of life": "35",
 	}
 	if converted, ok := convertMap[genre]; ok {
 		return converted
@@ -115,6 +115,33 @@ var (
 		},
 		2522335540328470744: func(genre string) string {
 			return strings.ToUpper(genre[:1]) + strings.ToLower(genre[1:])
+		},
+	}
+
+	// TODO add more genre conversions
+	genreConverter = map[int64]func(*paperback.Tag){
+		-1: func(tag *paperback.Tag) {
+			tag.Id = "0"
+			tag.Label = "genres"
+		},
+		2499283573021220255: func(tag *paperback.Tag) {
+			tag.Id = "tags"
+			tag.Label = "Tags"
+		},
+		9: func(tag *paperback.Tag) {
+			tag.Id = "0"
+			tag.Label = "Genres"
+		},
+	}
+
+	// TODO add more tag extras for each source
+	tagExtras = map[int64][]paperback.Tag{
+		9: {
+			{
+				Id:    "1",
+				Label: "Format",
+				Tags:  []paperback.TagTag{},
+			},
 		},
 	}
 )

@@ -47,6 +47,7 @@ func convertTachiyomiGenres(tManga *tachiyomi.BackupManga) []paperback.Tag {
 		}
 	}
 	// TODO add handler for adding other tag things like "Format" for  Mangasee
+	// TODO get extra tags for sources
 	return []paperback.Tag{
 		{
 			Id:    "0",
@@ -100,7 +101,7 @@ func getLastDateFetch(tManga *tachiyomi.BackupManga) int64 {
 }
 
 // TODO ConvertTachiyomiToPaperback
-// - chapterMarkers
+// TODO chapterMarkers
 func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, error) {
 	backup := config.DefaultPaperbackBackup()
 

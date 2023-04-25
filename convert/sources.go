@@ -6,10 +6,10 @@ import (
 	"github.com/TheCrether/tachiyomi-paperback-converter/models/paperback"
 )
 
-func reverseSourceMap[K comparable, V comparable](m map[K]V) map[V]K {
+func reverseMap[K comparable, V comparable](m map[K]V) map[V]K {
 	n := make(map[V]K, len(m))
 	for k, v := range m {
-		// check if value is default value of type V (like 0 for int, which means it is invalid)
+		// check if value is default value of type V (like 0 for int, which we will view is invalid)
 		if v == *new(V) {
 			continue
 		}
@@ -36,7 +36,7 @@ var (
 		"Webtoons":     2522335540328470744,
 	}
 
-	TachiyomiToPaperback = reverseSourceMap(PaperbackToTachiyomi)
+	TachiyomiToPaperback = reverseMap(PaperbackToTachiyomi)
 )
 
 func ConvertSourceMangaToTachiyomi(paperbackSource *paperback.SourceManga) (int64, error) {
