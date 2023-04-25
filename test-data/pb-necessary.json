@@ -1482,97 +1482,95 @@
       "sourceId": "FlameScans"
     },
     {
-      "mangaId": "1672311722-omniscient-readers-viewpoint",
-      "id": "3F0CFA7A-93BA-424A-B8F7-59DD855DED7B",
+      "mangaId": "https://mangakakalot.com/manga/kz929466",
+      "id": "65382BC0-E3F0-4F43-ACB4-91451A63D237",
       "manga": {
-        "id": "9B72FD4F-066D-43F7-A7CD-7AAB44545CA1",
-        "rating": 9,
+        "id": "4B72EAC9-C9E6-46E2-815C-99F6CF3697D9",
+        "rating": 0,
         "covers": [],
-        "author": "Sing-Shong",
+        "author": "Perico",
         "tags": [
           {
             "id": "0",
             "label": "genres",
             "tags": [
-              {
-                "id": "https:/flamescans.org/ygd/genres/action/",
-                "value": "Action"
-              },
-              {
-                "id": "https:/flamescans.org/ygd/genres/adventure/",
-                "value": "Adventure"
-              },
-              {
-                "id": "https:/flamescans.org/ygd/genres/fantasy/",
-                "value": "Fantasy"
-              },
-              {
-                "id": "https:/flamescans.org/ygd/genres/survival/",
-                "value": "Survival"
-              }
+              { "id": "6", "value": "Comedy" },
+              { "id": "27", "value": "Romance" },
+              { "id": "28", "value": "School life" },
+              { "id": "30", "value": "Seinen" },
+              { "id": "35", "value": "Slice of life" }
             ]
           }
         ],
-        "desc": "‘This is a development that I know of.’ The moment he thought that the world had been destroyed, and a new universe had unfolded. The new life of an ordinary reader begins within the world of the novel, a novel that he alone had finished.\n \nAdditional Information\nOfficial English: Webtoon",
-        "titles": ["Omniscient Reader’s Viewpoint"],
-        "image": "https://flamescans.org/wp-content/uploads/2021/01/ORV-NEW-COVER2.webp",
+        "desc": "An adorable tale of two childhood friends who start dating. As third-years, no moment can be wasted, as they have little time available until college. It starts with \"I think we should break up\". ---",
+        "titles": [
+          "15 Minutes 'Til They Actually Start Dating",
+          "15 Minutes avant qu'ils ne sortent ensemble",
+          "15 Minutos Hasta Que Empiecen a Salir En Serio",
+          "Maji de Tsukiau 15-fun Mae",
+          "Majide Tsukiau 15 Minutes Ago",
+          "За 15 минут до того как они начали встречаться",
+          "マジで付き合う15分前",
+          "15 Minutos até eles começarem a namorar",
+          "15 Minutes Before We Seriously Go Out"
+        ],
+        "image": "https://avt.mkklcdnv6temp.com/37/g/26-1659677256.jpg",
         "additionalInfo": {
           "langFlag": "_unknown",
           "users": "0",
+          "langName": "Unknown",
           "follows": "0",
-          "avgRating": "0.0",
           "views": "0",
-          "langName": "Unknown"
+          "avgRating": "0.0"
         },
         "hentai": false,
-        "artist": "Sleepy-C (REDICE STUDIO)",
+        "artist": "",
         "status": "Ongoing"
       },
       "originalInfo": {
-        "id": "9B72FD4F-066D-43F7-A7CD-7AAB44545CA1",
-        "rating": 9,
+        "id": "4B72EAC9-C9E6-46E2-815C-99F6CF3697D9",
+        "rating": 0,
         "covers": [],
-        "author": "Sing-Shong",
+        "author": "Perico",
         "tags": [
           {
             "id": "0",
             "label": "genres",
             "tags": [
-              {
-                "id": "https:/flamescans.org/ygd/genres/action/",
-                "value": "Action"
-              },
-              {
-                "id": "https:/flamescans.org/ygd/genres/adventure/",
-                "value": "Adventure"
-              },
-              {
-                "id": "https:/flamescans.org/ygd/genres/fantasy/",
-                "value": "Fantasy"
-              },
-              {
-                "id": "https:/flamescans.org/ygd/genres/survival/",
-                "value": "Survival"
-              }
+              { "id": "6", "value": "Comedy" },
+              { "id": "27", "value": "Romance" },
+              { "id": "28", "value": "School life" },
+              { "id": "30", "value": "Seinen" },
+              { "id": "35", "value": "Slice of life" }
             ]
           }
         ],
-        "desc": "‘This is a development that I know of.’ The moment he thought that the world had been destroyed, and a new universe had unfolded. The new life of an ordinary reader begins within the world of the novel, a novel that he alone had finished.\n \nAdditional Information\nOfficial English: Webtoon",
-        "titles": ["Omniscient Reader’s Viewpoint"],
-        "image": "https://flamescans.org/wp-content/uploads/2021/01/ORV-NEW-COVER2.webp",
+        "desc": "An adorable tale of two childhood friends who start dating. As third-years, no moment can be wasted, as they have little time available until college. It starts with \"I think we should break up\". ---",
+        "titles": [
+          "15 Minutes 'Til They Actually Start Dating",
+          "15 Minutes avant qu'ils ne sortent ensemble",
+          "15 Minutos Hasta Que Empiecen a Salir En Serio",
+          "Maji de Tsukiau 15-fun Mae",
+          "Majide Tsukiau 15 Minutes Ago",
+          "За 15 минут до того как они начали встречаться",
+          "マジで付き合う15分前",
+          "15 Minutos até eles começarem a namorar",
+          "15 Minutes Before We Seriously Go Out"
+        ],
+        "image": "https://avt.mkklcdnv6temp.com/37/g/26-1659677256.jpg",
         "additionalInfo": {
           "langFlag": "_unknown",
           "users": "0",
           "follows": "0",
+          "langName": "Unknown",
           "avgRating": "0.0",
-          "views": "0",
-          "langName": "Unknown"
+          "views": "0"
         },
         "hentai": false,
-        "artist": "Sleepy-C (REDICE STUDIO)",
+        "artist": "",
         "status": "Ongoing"
       },
-      "sourceId": "FlameScans"
+      "sourceId": "Mangakakalot"
     },
     {
       "mangaId": "1672311722-bj-archmage",
@@ -1682,75 +1680,6 @@
         "status": "Ongoing"
       },
       "sourceId": "FlameScans"
-    },
-    {
-      "mangaId": "guard-pass",
-      "id": "78DD3A27-10F9-4479-8458-EE897B1BDE5D",
-      "manga": {
-        "status": "Ongoing",
-        "author": "Oh son do son [Add, ]",
-        "titles": ["Guard Pass", "가드패스"],
-        "id": "08F52230-0B86-417B-A049-7203C36CDA21",
-        "artist": "Oh son do son [Add, ]",
-        "hentai": false,
-        "image": "https://i2.wp.com/imperfectcomic.org/wp-content/uploads/2022/02/1645277331-9504-i361766.png",
-        "covers": [],
-        "additionalInfo": {
-          "langFlag": "_unknown",
-          "users": "0",
-          "follows": "0",
-          "langName": "Unknown",
-          "views": "0",
-          "avgRating": "0.0"
-        },
-        "desc": "Lim Sejun, who likes to eat, is fat and has a large physique. He has high self-esteem and a firm personality that doesn’t even care about being teased for being fat. He has only one friend, ‘Seo Hajin’. She has always been learning Jiujitsu to protect Sejun since childhood. One day, Sejun has trouble with a delinquent in the same class, and Hajin sees it and destroys that delinquent. But one night, Hajin is found severely beaten and suffers from a badly injured knee and more serious psychological trauma. Sejun tries to tell the police, but when the investigation doesn’t make much progress, …",
-        "tags": [
-          {
-            "id": "0",
-            "label": "genres",
-            "tags": [
-              { "id": "action", "value": "Action" },
-              { "id": "drama", "value": "Drama" },
-              { "id": "martial-arts", "value": "Martial Arts" },
-              { "id": "school-life", "value": "School Life" },
-              { "id": "shounen", "value": "Shounen" }
-            ]
-          }
-        ]
-      },
-      "originalInfo": {
-        "status": "Ongoing",
-        "author": "Oh son do son [Add, ]",
-        "titles": ["Guard Pass", "가드패스"],
-        "id": "08F52230-0B86-417B-A049-7203C36CDA21",
-        "artist": "Oh son do son [Add, ]",
-        "hentai": false,
-        "image": "https://i2.wp.com/imperfectcomic.org/wp-content/uploads/2022/02/1645277331-9504-i361766.png",
-        "covers": [],
-        "additionalInfo": {
-          "langFlag": "_unknown",
-          "users": "0",
-          "follows": "0",
-          "avgRating": "0.0",
-          "langName": "Unknown",
-          "views": "0"
-        },
-        "desc": "Lim Sejun, who likes to eat, is fat and has a large physique. He has high self-esteem and a firm personality that doesn’t even care about being teased for being fat. He has only one friend, ‘Seo Hajin’. She has always been learning Jiujitsu to protect Sejun since childhood. One day, Sejun has trouble with a delinquent in the same class, and Hajin sees it and destroys that delinquent. But one night, Hajin is found severely beaten and suffers from a badly injured knee and more serious psychological trauma. Sejun tries to tell the police, but when the investigation doesn’t make much progress, …",
-        "tags": [
-          {
-            "id": "0",
-            "label": "genres",
-            "tags": [
-              { "id": "action", "value": "Action" },
-              { "id": "drama", "value": "Drama" },
-              { "id": "martial-arts", "value": "Martial Arts" },
-              { "id": "school-life", "value": "School Life" },
-              { "id": "shounen", "value": "Shounen" }
-            ]
-          }
-        ]
-      },
-      "sourceId": "ImperfectComic"
     },
     {
       "mangaId": "damn-reincarnation",
