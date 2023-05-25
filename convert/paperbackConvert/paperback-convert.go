@@ -1,6 +1,7 @@
 package paperbackConvert
 
 import (
+	"sort"
 	"strings"
 
 	"github.com/TheCrether/tachiyomi-paperback-converter/config"
@@ -111,6 +112,47 @@ func getLastDateFetch(tManga *tachiyomi.BackupManga) int64 {
 	return highestDateFetch
 }
 
+func convertTachiyomiChapters(tManga *tachiyomi.BackupManga, sourceMangaId string) []paperback.ChapterMarker {
+	filteredChapters := make([]*tachiyomi.BackupChapter, 0, len(tManga.Chapters))
+	for _, chapter := range tManga.Chapters {
+		if chapter.Read || chapter.LastPageRead > 0 {
+			filteredChapters = append(filteredChapters, chapter)
+		}
+	}
+
+	sort.Slice(filteredChapters, func(i, j int) bool {
+		return filteredChapters[i].ChapterNumber < filteredChapters[j].ChapterNumber
+	})
+	chapters := make([]paperback.ChapterMarker, 0, len(tManga.Chapters))
+
+	for i, chapter := range tManga.Chapters {
+		sourceId, err := convert.ConvertTachiyomiSourceIdToPaperbackId(tManga.Source)
+		if err != nil {
+			continue
+		}
+		chapters[i] = paperback.ChapterMarker{
+			Completed:  chapter.Read,
+			Time:       config.ConvertMilliDateToSwiftReferenceDate(chapter.DateFetch),
+			TotalPages: 0,     // TODO look for a way to get total pages from tachiyomi backup
+			LastPage:   0,     // TODO look for a way to get last page from tachiyomi backup
+			Hidden:     false, // TODO look for a way to get hidden from tachiyomi backup
+			Chapter: paperback.Chapter{
+				Id:           tachiyomiIdConverter[tManga.Source](tManga.Url),
+				ChapNum:      float64(chapter.ChapterNumber),
+				MangaId:      sourceMangaId,
+				Volume:       0, // TODO look for a way to get volume from tachiyomi backup
+				LangCode:     convert.TachiyomiToLangCode[tManga.Source],
+				Time:         config.ConvertMilliDateToSwiftReferenceDate(chapter.DateUpload),
+				SortingIndex: float64(i),
+				Group:        chapter.Scanlator,
+				Name:         chapter.Name,
+				SourceId:     sourceId,
+			},
+		}
+	}
+	return chapters
+}
+
 // TODO ConvertTachiyomiToPaperback
 // TODO chapterMarkers
 func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, error) {
@@ -124,13 +166,13 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 	backup.Tabs = getTabs(tBackup)
 
 	for _, manga := range tBackup.BackupManga {
-		source, ok := convert.ConvertTachiyomiSourceIdToPaperbackId(manga.Source)
-		if ok != nil {
+		source, err := convert.ConvertTachiyomiSourceIdToPaperbackId(manga.Source)
+		if err != nil {
 			continue
 		}
 
-		mangaIdHandler, okBool := tachiyomiUrlHandler[manga.Source]
-		if !okBool {
+		mangaIdHandler, ok := tachiyomiUrlHandler[manga.Source]
+		if !ok {
 			// skip manga if source is not supported
 			continue
 		}
@@ -148,12 +190,12 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 			Image:  manga.ThumbnailUrl,
 			Hentai: false, // tachiyomi doesn't seem to have a flag for this
 			AdditionalInfo: paperback.AdditionalInfo{
-				LangFlag:  "en", // just set en as default since tachiyomi doesn't have a flag for this
+				LangFlag:  convert.TachiyomiToLangCode[manga.Source],
 				Users:     "0",
 				Follows:   "0",
 				AvgRating: "0.0",
 				Views:     "0",
-				LangName:  "English",
+				LangName:  convert.LangCodeToFullLang[convert.TachiyomiToLangCode[manga.Source]],
 			},
 			Status: paperbackStatus[manga.Status],
 		}
@@ -176,6 +218,7 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 
 		backup.Library = append(backup.Library, *libraryElement)
 		backup.SourceMangas = append(backup.SourceMangas, *sourceManga)
+		backup.ChapterMarkers = append(backup.ChapterMarkers, convertTachiyomiChapters(manga, sourceMangaUUID)...)
 	}
 	return backup, nil
 }

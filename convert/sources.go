@@ -37,6 +37,28 @@ var (
 	}
 
 	TachiyomiToPaperback = reverseMap(PaperbackToTachiyomi)
+
+	// information from: https://github.com/tachiyomiorg/tachiyomi-extensions/blob/repo/index.json
+	TachiyomiToLangCode = map[int64]string{
+		6247824327199706550: "en",
+		7890050626002177109: "en",
+		6350607071566689772: "en",
+		3470433521851976761: "en",
+		5020395055978987501: "en",
+		2499283573021220255: "en",
+		2528986671771677900: "en",
+		1024627298672457456: "en",
+		9:                   "en",
+		734865402529567092:  "en",
+		5177220001642863679: "en",
+		4667040294697888218: "en",
+		5190569675461947007: "en",
+		2522335540328470744: "en",
+	}
+
+	LangCodeToFullLang = map[string]string{
+		"en": "English",
+	}
 )
 
 func ConvertSourceMangaToTachiyomi(paperbackSource *paperback.SourceManga) (int64, error) {

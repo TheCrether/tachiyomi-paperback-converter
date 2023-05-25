@@ -140,4 +140,60 @@ var (
 			},
 		},
 	}
+
+	tachiyomiIdConverter = map[int64]func(string) string{
+		6247824327199706550: func(id string) string {
+			index := strings.Index(id, "-")
+			return id[index+1 : len(id)-1]
+		},
+		7890050626002177109: func(id string) string {
+			return strings.Replace(id, "/chapter/", "", -1)
+		},
+		6350607071566689772: func(id string) string {
+			return "https://flamescans.org" + id
+		},
+		3470433521851976761: func(id string) string {
+			id = strings.Replace(id, "https://1stkissmanga.me/manga/", "", -1)
+			id = strings.Replace(id, "/?style=list", "", -1)
+			return id
+		},
+		5020395055978987501: func(id string) string {
+			index := strings.Index(id[1:], "/") + 1
+			return id[index+1:]
+		},
+		2499283573021220255: func(id string) string {
+			return strings.Replace(id, "/chapter/", "", -1)
+		},
+		2528986671771677900: func(id string) string {
+			return "https://mangakakalot.com" + id
+		},
+		1024627298672457456: func(id string) string {
+			return id
+		},
+		9: func(id string) string {
+			return strings.Replace(id, "/read-online/", "", -1)
+		},
+		734865402529567092: func(id string) string {
+			index := strings.LastIndex(id[:len(id)-1], "/")
+			return id[index+1 : len(id)-1]
+		},
+		5177220001642863679: func(id string) string {
+			index := strings.LastIndex(id, "/")
+			return id[index+1:]
+		},
+		4667040294697888218: func(id string) string {
+			id = strings.Replace(id, "/?style=list", "", -1)
+			id = strings.Replace(id, "https://teenmanhua.com/manga/", "", -1)
+			return id
+		},
+		5190569675461947007: func(id string) string {
+			id = strings.Replace(id, "/?style=list", "", -1)
+			id = strings.Replace(id, "https://toonily.com/webtoon/", "", -1)
+			return id
+		},
+		2522335540328470744: func(id string) string {
+			index := strings.LastIndex(id, "=")
+			return id[index+1:] // not sure about this one
+		},
+	}
 )
