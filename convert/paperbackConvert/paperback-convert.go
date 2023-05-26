@@ -130,17 +130,18 @@ func convertTachiyomiChapters(tManga *tachiyomi.BackupManga, sourceMangaId strin
 		if err != nil {
 			continue
 		}
+
 		chapters[i] = paperback.ChapterMarker{
 			Completed:  chapter.Read,
 			Time:       config.ConvertMilliDateToSwiftReferenceDate(chapter.DateFetch),
-			TotalPages: 0,     // TODO look for a way to get total pages from tachiyomi backup
-			LastPage:   0,     // TODO look for a way to get last page from tachiyomi backup
-			Hidden:     false, // TODO look for a way to get hidden from tachiyomi backup
+			TotalPages: 0, // HINT no total pages field in tachiyomi backup
+			LastPage:   int(chapter.GetLastPageRead()),
+			Hidden:     false, // HINT no hidden field in tachiyomi backup
 			Chapter: paperback.Chapter{
 				Id:           tachiyomiIdConverter[tManga.Source](tManga.Url),
 				ChapNum:      float64(chapter.ChapterNumber),
 				MangaId:      sourceMangaId,
-				Volume:       0, // TODO look for a way to get volume from tachiyomi backup
+				Volume:       0, // HINT no volume field in tachiyomi backup
 				LangCode:     convert.TachiyomiToLangCode[tManga.Source],
 				Time:         config.ConvertMilliDateToSwiftReferenceDate(chapter.DateUpload),
 				SortingIndex: float64(i),
@@ -154,7 +155,6 @@ func convertTachiyomiChapters(tManga *tachiyomi.BackupManga, sourceMangaId strin
 }
 
 // TODO ConvertTachiyomiToPaperback
-// TODO chapterMarkers
 func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, error) {
 	backup := config.DefaultPaperbackBackup()
 
@@ -173,7 +173,7 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 
 		mangaIdHandler, ok := tachiyomiUrlHandler[manga.Source]
 		if !ok {
-			// skip manga if source is not supported
+			// TODO error handling/logging which mangas could not be converted
 			continue
 		}
 
@@ -202,7 +202,7 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 		libraryElement := &paperback.LibraryElement{
 			Manga:          *pManga,
 			LastRead:       config.ConvertMilliDateToSwiftReferenceDate(getLastRead(manga)),
-			LastUpdated:    config.ConvertMilliDateToSwiftReferenceDate(getLastDateFetch(manga)), // TODO maybe get from highest dateFetch from chapter?
+			LastUpdated:    config.ConvertMilliDateToSwiftReferenceDate(getLastDateFetch(manga)),
 			DateBookmarked: config.ConvertMilliDateToSwiftReferenceDate(manga.DateAdded),
 			LibraryTabs:    getTabsForManga(backup, manga),
 			Updates:        0,

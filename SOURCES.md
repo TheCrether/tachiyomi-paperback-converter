@@ -27,19 +27,34 @@ The mangas I used for testing the different extensions are below.
 
 TODO add URLs
 
-| Source               | Manga Name                                                                      | Url |
-| -------------------- | ------------------------------------------------------------------------------- | --- |
-| Asura Scans          | Relife Player                                                                   |     |
-| BatoTo               | The Detective of Muiella                                                        |     |
-| Flame Scans          | BJ Archmage                                                                     |     |
-| KissManga (1st Kiss) | Match Made in Heaven by Chance                                                  |     |
-| MangaBuddy           | Dorobou-chan                                                                    |     |
-| MangaDex             | I'm A Shy and Poor Otaku but This Beautiful Rich Young Lady is Obsessed with Me |     |
-| Mangakakalot         | 15 Minutes 'Til They Actually Start Dating                                      |     |
-| Manganato            | A Story About Smoking At The Back Of The Supermarket                            |     |
-| Mangasee             | New Normal                                                                      |     |
-| MCReader.net         | Damn Reincarnation                                                              |     |
-| Reaper Scans         | Adeline's Twilight                                                              |     |
-| TeenManhua           | Marry my husband                                                                |     |
-| Toonily              | Drawing Romance                                                                 |     |
-| Webtoons             | Homesick                                                                        |     |
+| Source               | Manga Name                                                                      | Url            |
+| -------------------- | ------------------------------------------------------------------------------- | -------------- |
+| Asura Scans          | Relife Player                                                                   | [asura]        |
+| BatoTo               | The Detective of Muiella                                                        | [bato]         |
+| Flame Scans          | BJ Archmage                                                                     | [flame]        |
+| KissManga (1st Kiss) | Match Made in Heaven by Chance                                                  | [kiss]         |
+| MangaBuddy           | Dorobou-chan                                                                    | [mangabuddy]   |
+| MangaDex             | I'm A Shy and Poor Otaku but This Beautiful Rich Young Lady is Obsessed with Me | [mangadex]     |
+| Mangakakalot         | 15 Minutes 'Til They Actually Start Dating                                      | [mangakakalot] |
+| Manganato            | A Story About Smoking At The Back Of The Supermarket                            | [manganato]    |
+| Mangasee             | New Normal                                                                      | [mangasee]     |
+| MCReader.net         | Damn Reincarnation                                                              | [mcreader]     |
+| Reaper Scans         | Adeline's Twilight                                                              | [reaper]       |
+| TeenManhua           | Marry my husband                                                                | [teenmanhua]   |
+| Toonily              | Drawing Romance                                                                 | [toonily]      |
+| Webtoons             | Homesick                                                                        | [webtoons]     |
+
+[asura]: https://www.asurascans.com/manga/4569947261-relife-player/
+[bato]: https://mto.to/series/74398
+[flame]: https://flamescans.org/series/1685095321-bj-archmage/
+[kiss]: https://1stkissmanga.me/manga/match-made-in-heaven-by-chance/
+[mangabuddy]: https://mangabuddy.com/dorobou-chan
+[mangadex]: https://mangadex.org/title/568e2624-cf7b-4c94-a6a3-803838a1836e/i-m-a-shy-and-poor-otaku-but-this-beautiful-rich-young-lady-is-obsessed-with-me
+[mangakakalot]: https://mangakakalot.com/manga/kz929466
+[manganato]: https://manganato.com/manga-no991149
+[mangasee]: https://mangasee123.com/manga/New-Normal
+[mcreader]: https://www.mreader.co/manga/damn-reincarnation
+[reaper]: https://reaperscans.com/comics/4530-adelines-twilight
+[teenmanhua]: http://teenmanhua.me/manga/marry-my-husband
+[toonily]: https://toonily.com/webtoon/drawing-romance/
+[webtoons]: https://www.webtoons.com/en/thriller/homesick/list?title_no=2759

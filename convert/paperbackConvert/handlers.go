@@ -32,7 +32,6 @@ var (
 		6: "Hiatus",
 	}
 
-	// TODO modify handlers to fit extensions
 	tachiyomiUrlHandler = map[int64]func(*paperback.SourceManga, string){
 		6247824327199706550: func(pManga *paperback.SourceManga, mangaId string) {
 			pManga.MangaId = strings.Replace(mangaId, "/manga/", "", -1)
@@ -118,7 +117,6 @@ var (
 		},
 	}
 
-	// TODO add more genre conversions
 	// every handler only changes the necessary fields, since Id and Label are prepolulated
 	genreTagConverter = map[int64]func(*paperback.Tag){
 		2499283573021220255: func(tag *paperback.Tag) {
@@ -130,7 +128,6 @@ var (
 		},
 	}
 
-	// TODO add more tag extras for each source
 	tagExtras = map[int64][]paperback.Tag{
 		9: {
 			{
