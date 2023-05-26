@@ -48,7 +48,7 @@ func convertPaperbackSourceDataToTachiyomi(paperbackBackup *paperback.Backup, pa
 	} else {
 		return errors.New("could not convert source")
 	}
-	if handler, ok := tachiyomiReadHandler[pSourceManga.SourceId]; ok {
+	if handler, ok := paperbackReadHandler[pSourceManga.SourceId]; ok {
 		chapterMarkers := getChapterMarkers(paperbackBackup, pSourceManga)
 		for _, chapterMarker := range chapterMarkers {
 			tChapter := &tachiyomi.BackupChapter{

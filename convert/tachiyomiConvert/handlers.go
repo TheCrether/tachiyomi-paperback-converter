@@ -1,6 +1,7 @@
 package tachiyomiConvert
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/TheCrether/tachiyomi-paperback-converter/models/paperback"
@@ -78,7 +79,7 @@ var (
 		},
 	}
 
-	tachiyomiReadHandler = map[string]func(*paperback.ChapterMarker, string) string{
+	paperbackReadHandler = map[string]func(*paperback.ChapterMarker, string) string{
 		"AsuraScans": func(marker *paperback.ChapterMarker, chapterId string) string {
 			return "/" + chapterId + "/"
 		},
@@ -115,10 +116,14 @@ var (
 		"Toonily": func(marker *paperback.ChapterMarker, chapterId string) string {
 			return "https://toonily.com/webtoon/" + chapterId + "/?style=list"
 		},
-		// TODO find good way to convert paperback structure to weird tachiyomi string
-		// "Webtoons": func(marker *paperback.ChapterMarker, chapterId string) string {
-		// 	split := strings.Split(chapterId, "/list")
-		// 	return fmt.Sprintf("/en/%s/episode-%d", split[0], int(marker.Chapter.ChapNum))
-		// },
+		"Webtoons": func(marker *paperback.ChapterMarker, chapterId string) string {
+			langCodeMap := map[string]string{
+				"gb": "en",
+			}
+			split := strings.Split(marker.Chapter.MangaId, "/list")
+			// url := "/en/" + langCodeMap[marker.Chapter.LangCode] + "/episode-" + chapterId + "/"
+			url := fmt.Sprintf("/%s/%s/episode-%s/viewer%s\u0026episode_no=%s", langCodeMap[marker.Chapter.LangCode], split[0], chapterId, split[1], chapterId)
+			return url
+		},
 	}
 )
