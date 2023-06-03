@@ -27,6 +27,14 @@
         "${workspaceFolder}/test-data/pb-necessary.json",
         "tachiyomi.proto"
       ]
+    },
+    {
+      "name": "Build WASM and launch server",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "program": "cmd/server",
+      "preLaunchTask": "Build WASM"
     }
   ]
 }

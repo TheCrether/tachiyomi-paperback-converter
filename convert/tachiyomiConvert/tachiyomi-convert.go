@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/TheCrether/tachiyomi-paperback-converter/config"
-	"github.com/TheCrether/tachiyomi-paperback-converter/convert"
+	"github.com/TheCrether/tachiyomi-paperback-converter/convert/commonConvert"
 	"github.com/TheCrether/tachiyomi-paperback-converter/models/paperback"
 	"github.com/TheCrether/tachiyomi-paperback-converter/models/tachiyomi"
 )
@@ -38,7 +38,7 @@ func convertPaperbackSourceDataToTachiyomi(paperbackBackup *paperback.Backup, pa
 	if err != nil {
 		return err
 	}
-	tachiyomiSourceId, err := convert.ConvertSourceMangaToTachiyomi(pSourceManga)
+	tachiyomiSourceId, err := commonConvert.ConvertSourceMangaToTachiyomi(pSourceManga)
 	if err != nil {
 		return err
 	}

@@ -1,11 +1,12 @@
 package paperbackConvert
 
 import (
+	"fmt"
 	"sort"
 	"strings"
 
 	"github.com/TheCrether/tachiyomi-paperback-converter/config"
-	"github.com/TheCrether/tachiyomi-paperback-converter/convert"
+	"github.com/TheCrether/tachiyomi-paperback-converter/convert/commonConvert"
 	"github.com/TheCrether/tachiyomi-paperback-converter/models/paperback"
 	"github.com/TheCrether/tachiyomi-paperback-converter/models/tachiyomi"
 	"github.com/google/uuid"
@@ -123,10 +124,11 @@ func convertTachiyomiChapters(tManga *tachiyomi.BackupManga, sourceMangaId strin
 	sort.Slice(filteredChapters, func(i, j int) bool {
 		return filteredChapters[i].ChapterNumber < filteredChapters[j].ChapterNumber
 	})
-	chapters := make([]paperback.ChapterMarker, 0, len(tManga.Chapters))
+	chapters := make([]paperback.ChapterMarker, len(tManga.Chapters))
+	fmt.Println("length" + fmt.Sprint(len(chapters)))
 
 	for i, chapter := range tManga.Chapters {
-		sourceId, err := convert.ConvertTachiyomiSourceIdToPaperbackId(tManga.Source)
+		sourceId, err := commonConvert.ConvertTachiyomiSourceIdToPaperbackId(tManga.Source)
 		if err != nil {
 			continue
 		}
@@ -142,7 +144,7 @@ func convertTachiyomiChapters(tManga *tachiyomi.BackupManga, sourceMangaId strin
 				ChapNum:      float64(chapter.ChapterNumber),
 				MangaId:      sourceMangaId,
 				Volume:       0, // HINT no volume field in tachiyomi backup
-				LangCode:     convert.TachiyomiToLangCode[tManga.Source],
+				LangCode:     commonConvert.TachiyomiToLangCode[tManga.Source],
 				Time:         config.ConvertMilliDateToSwiftReferenceDate(chapter.DateUpload),
 				SortingIndex: float64(i),
 				Group:        chapter.Scanlator,
@@ -166,7 +168,7 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 	backup.Tabs = getTabs(tBackup)
 
 	for _, manga := range tBackup.BackupManga {
-		source, err := convert.ConvertTachiyomiSourceIdToPaperbackId(manga.Source)
+		source, err := commonConvert.ConvertTachiyomiSourceIdToPaperbackId(manga.Source)
 		if err != nil {
 			continue
 		}
@@ -190,12 +192,12 @@ func ConvertTachiyomiToPaperback(tBackup *tachiyomi.Backup) (*paperback.Backup, 
 			Image:  manga.ThumbnailUrl,
 			Hentai: false, // tachiyomi doesn't seem to have a flag for this
 			AdditionalInfo: paperback.AdditionalInfo{
-				LangFlag:  convert.TachiyomiToLangCode[manga.Source],
+				LangFlag:  commonConvert.TachiyomiToLangCode[manga.Source],
 				Users:     "0",
 				Follows:   "0",
 				AvgRating: "0.0",
 				Views:     "0",
-				LangName:  convert.LangCodeToFullLang[convert.TachiyomiToLangCode[manga.Source]],
+				LangName:  commonConvert.LangCodeToFullLang[commonConvert.TachiyomiToLangCode[manga.Source]],
 			},
 			Status: paperbackStatus[manga.Status],
 		}

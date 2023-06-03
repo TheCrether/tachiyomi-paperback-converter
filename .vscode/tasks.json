@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "go",
+      "label": "Build WASM",
+      "command": "build",
+      "args": ["-o", "../../assets/app.wasm"],
+      "problemMatcher": ["$go"],
+      "group": "build",
+      "detail": "cd /home/crether/coding/personal/tachiyomi-paperback-converter; go build ${fileDirname}",
+      "options": {
+        "env": {
+          "GOOS": "js",
+          "GOARCH": "wasm"
+        },
+        "cwd": "${workspaceFolder}/cmd/wasm"
+      }
+    }
+  ]
+}

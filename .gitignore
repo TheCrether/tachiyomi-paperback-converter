@@ -23,3 +23,7 @@ go.work
 
 .vscode/*
 !.vscode/launch.json
+!.vscode/tasks.json
+
+assets/wasm_exec.js
+assets/app.wasm
