@@ -1,12 +1,14 @@
 # tachiyomi-paperback-converter
 
+## This project is not being actively maintained at the moment and does not support the latest Paperback versions & Tachiyomi alternatives
+
 This is a project which can convert backups from Paperback/Tachiyomi to make it easier to switch platforms.
 
 ## Supported Manga Readers
 
 The two main manga readers that are supported are:
 
-- Paperback
+- Paperback v0.7
 - Tachiyomi
 
 Support for other manga readers may be added in the future.
