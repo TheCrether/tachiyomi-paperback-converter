@@ -6,22 +6,32 @@ function convert(e) {
     if (!event.target) return;
     console.log(event.target.result);
     // console.log(new Uint8Array(event.target.result));
+    let value, type, fileName;
     if (event.target.result instanceof ArrayBuffer) {
-      console.log(convertTachiyomi(new Uint8Array(event.target.result)));
+      const converted = convertTachiyomi(new Uint8Array(event.target.result));
+      console.log("tachiyomi converted", converted);
+      value = [converted.value];
+      type = "application/json";
+      fileName = "paperback.json";
+    } else if (typeof event.target.result === "string") {
+      const converted = convertPaperback(event.target.result);
+      console.log(converted);
+      value = [converted.value];
+      type = "application/gzip";
+      fileName = "tachiyomi.proto.gz";
     }
-    if (typeof event.target.result === "string") {
-      const a = convertPaperback(event.target.result).value;
-      console.log(a);
-      var blob = new Blob([a], { type: "application/gzip" });
-      var link = document.createElement("a");
-      link.href = window.URL.createObjectURL(blob);
-      var fileName = "tachiyomi.proto.gz";
-      link.download = fileName;
-      link.click();
-    }
+
+    var blob = new Blob(value, { type });
+    var link = document.createElement("a");
+    link.href = window.URL.createObjectURL(blob);
+    link.download = fileName;
+    link.click();
   });
   // reader.readAsText(e.target.files[0]);
-  if (e.target.id === "ty-pb" && input.files[0].type === "application/gzip") {
+  if (
+    e.target.id === "ty-pb" &&
+    ["application/gzip", "application/x-gzip"].includes(input.files[0].type)
+  ) {
     reader.readAsArrayBuffer(input.files[0]);
   } else if (
     e.target.id === "pb-ty" &&
