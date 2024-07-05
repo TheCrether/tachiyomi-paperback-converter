@@ -8,7 +8,7 @@ This is a project which can convert backups from Paperback/Tachiyomi to make it 
 
 The two main manga readers that are supported are:
 
-- Paperback v0.7
+- Paperback v0.7 (0.8 currently WIP)
 - Tachiyomi
 
 Support for other manga readers may be added in the future.
@@ -19,27 +19,24 @@ Support for other manga readers may be added in the future.
 
 Groups of Manga are called Collections in Paperback. These are converted to Categories in Tachiyomi.
 
-### Sources
+### Sources 0.7
 
-| Source               | Manga | Chapters Read | Notes              |
-| -------------------- | ----- | ------------- | ------------------ |
-| Asura Scans          | ✔️     | ✔️             |                    |
-| BatoTo               | ✔️     | ✔️             |                    |
-| Flame Scans          | ✔️     | ✔️             |                    |
-| Imperfect Comics     | ✔️     | ✔️             |                    |
-| KissManga (1st Kiss) | ✔️     | ✔️             |                    |
-| MangaBuddy           | ✔️     | ✔️             |                    |
-| MangaDex             | ✔️     | ✔️             |                    |
-| Mangakakalot         | ✔️     | ✔️             | might be unstable¹ |
-| Manganato            | ✔️     | ✔️             | might be unstable¹ |
-| Mangasee             | ✔️     | ✔️             |                    |
-| MCReader.net         | ✔️     | ✔️             |                    |
-| Reaper Scans         | ✔️     | ✔️             |                    |
-| TeenManhua           | ✔️     | ✔️             |                    |
-| Toonily              | ✔️     | ✔️             |                    |
-| Webtoons             | ✔️     | ❌             |                    |
+| Source               | Manga | Chapters Read | Notes     |
+| -------------------- | ----- | ------------- | --------- |
+| Asura Scans          | ✔️     | ✔️             |           |
+| BatoTo               | ✔️     | ✔️             |           |
+| KissManga (1st Kiss) | ✔️     | ✔️             |           |
+| MangaBuddy           | ✔️     | ✔️             |           |
+| MangaDex             | ✔️     | ✔️             |           |
+| Mangakakalot         | ✔️¹    | ✔️¹            | unstable¹ |
+| Manganato            | ✔️¹    | ✔️¹            | unstable¹ |
+| Mangasee             | ✔️     | ✔️             |           |
+| Mgeko (McReader)     | ✔️     | ✔️             |           |
+| Reaper Scans         | ✔️     | ✔️             |           |
+| Toonily              | ✔️     | ✔️             |           |
+| Webtoons             | ✔️     | ❌             |           |
 
-¹ - MangaDex and Mangakakalot are known to be unstable, since the Paperback implementation is inconsistent. If there is an issue when converting with these two sources, please open an issue. (especially for the chapters read conversion)
+¹ - Mangakakalot and Manganato are known to be unstable, since the Paperback implementation is inconsistent. If there is an issue when converting with these two sources, please open an issue. (especially for the chapters read conversion)
 
 ## Tachiyomi -> Paperback
 
