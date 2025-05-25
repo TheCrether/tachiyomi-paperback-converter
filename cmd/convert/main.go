@@ -1,6 +1,7 @@
 package main
 
 import (
+	"archive/zip"
 	"bytes"
 	"compress/gzip"
 	"encoding/json"
@@ -14,16 +15,21 @@ import (
 )
 
 func main() {
+	log.Printf("%v", os.Args)
 	if len(os.Args) != 4 {
 		log.Fatalf("Usage:  %s <output-type: tachiyomi/paperback> <input> <output>\n", os.Args[0])
 	}
 
-	if strings.ToLower(os.Args[1]) == "tachiyomi" {
+	cmd := strings.ToLower(os.Args[1])
+
+	if cmd == "tachiyomi" {
 		ConvertPaperback()
-	} else if strings.ToLower(os.Args[1]) == "paperback" {
+	} else if cmd == "paperback" {
 		ConvertTachiyomi()
-	} else if strings.ToLower(os.Args[1]) == "tachiyomi-json" {
+	} else if cmd == "tachiyomi-json" {
 		ConvertTachiyomiToJSON()
+	} else if cmd == "paperbackv8" {
+		ConvertPaperbackV8()
 	} else {
 		log.Fatalf("Usage: %s <tachiyomi/paperback> <input> <output>\n", os.Args[0])
 	}
@@ -53,6 +59,27 @@ func ConvertTachiyomiToJSON() {
 	out, err := json.Marshal(backup)
 	if err != nil {
 		log.Fatalln("Error marshalling json:", err)
+	}
+	err = os.WriteFile(os.Args[3], out, 0644)
+	if err != nil {
+		log.Fatalln("Error writing file:", err)
+	}
+}
+
+func ConvertPaperbackV8() {
+	zipFile, err := zip.OpenReader("pk.pkzip.pas4")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer zipFile.Close()
+
+	out, err := convert.ConvertPaperbackV8(zipFile)
+	if err != nil {
+		log.Fatalln("Error converting backup:", err)
+	}
+
+	if !strings.HasSuffix(os.Args[3], ".gz") {
+		os.Args[3] += ".gz"
 	}
 	err = os.WriteFile(os.Args[3], out, 0644)
 	if err != nil {
